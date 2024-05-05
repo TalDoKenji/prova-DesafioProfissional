@@ -1,0 +1,369 @@
+
+Para iniciar a aplicação é necessário a utilização do comando 'npm start' em um terminal.
+
+o schema da entidade de quadrinho é:
+  schema: {
+    idComic: number               --> identificador do quadrinho da API marvel
+    titulo: String                --> titulo do quadrinho
+    descricao: String             --> descrição do quadrinho
+    qtdePaginas: number           --> quantidade de páginas que o quadrinho tem
+    dataPublicacao: Array<Object> --> datas de publicações, inclusive de lançamento físico, digital, etc
+    capa: String                  --> imagem da capa do quadrinho
+  }
+
+as rotas disponíveis na entidade de Quadrinho são:
+
+- busca todos os quadrinhos: 
+  path: http://localhost:3000/api/v1/todasComics
+  tipo de retorno:  Array de Objetos
+  status de retorno: 200
+  tipo de métodos: get
+  parametros necessários: nenhum
+  schema: {
+    idComic: number,
+    titulo: String
+    descricao: String
+    qtdePaginas: number,
+    dataPublicacao: Array<Object>
+    capa: String
+  }
+  exemplo: [
+    {
+        "_id": "6636839bb91b80fe0336dded",
+        "idComic": 53336,
+        "titulo": "Spider-Verse (2014) #2",
+        "descricao": "Spider-Verse tie-in! The Spider-Verse anthology continues! So many Spider-Men and Women! This issue: Video-game Spidey! Punk-Rock Spidey! Fairy Tale Spidey! Mexico's own Spider tale in Spanish!",
+        "qtdePaginas": 40,
+        "dataPublicacao": [
+            {
+                "type": "onsaleDate",
+                "date": "2015-01-14T00:00:00-0500"
+            },
+            {
+                "type": "focDate",
+                "date": "2014-12-15T00:00:00-0500"
+            },
+            {
+                "type": "unlimitedDate",
+                "date": "2015-07-27T10:43:44-0400"
+            },
+            {
+                "type": "digitalPurchaseDate",
+                "date": "2015-01-14T00:00:00-0500"
+            }
+        ],
+        "capa": "http://i.annihil.us/u/prod/marvel/i/mg/d/90/55b6423472961",
+        "__v": 0
+    },
+    {
+        "_id": "6636839bb91b80fe0336ddee",
+        "idComic": 50554,
+        "titulo": "Spider-Verse (2014) #1",
+        "descricao": "SPIDER-VERSE IS HERE! Dive deep into the Spider-Verse event with the most Spider-filled anthology ever! ASM team DAN SLOTT & HUMBERTO RAMOS kick it all off! Skottie Young (ROCKET RACCOON) & Jake Parker (ALL-NEW X-MEN) tell a Mangaverse Spidey story! Robbie Thompson (writer of television's Supernatural) and Dennis Medri introduce a Steampunk Spider-Woman! Katie Cook (Marvel animal variants) introduces a new Spider-Character for the ages!",
+        "qtdePaginas": 48,
+        "dataPublicacao": [
+            {
+                "type": "onsaleDate",
+                "date": "2014-11-12T00:00:00-0500"
+            },
+            {
+                "type": "focDate",
+                "date": "2014-10-20T00:00:00-0400"
+            },
+            {
+                "type": "unlimitedDate",
+                "date": "2015-05-11T00:00:00-0400"
+            },
+            {
+                "type": "digitalPurchaseDate",
+                "date": "2014-11-12T00:00:00-0500"
+            }
+        ],
+        "capa": "http://i.annihil.us/u/prod/marvel/i/mg/8/a0/545d017cdbb04",
+        "__v": 0
+    },
+    {
+        "_id": "66368542693bb959f710961b",
+        "idComic": 456,
+        "titulo": "Cassia se tornou uma mulher-aranha",
+        "descricao": "pipipopo",
+        "qtdePaginas": 43,
+        "dataPublicacao": [
+            {
+                "onsaledateDate": "2004-04-23"
+            }
+        ],
+        "capa": "fotinha da fumy",
+        "__v": 0
+    }
+  ]
+
+- busca um quadrinho:
+  path: http://localhost:3000/api/v1/comics/:id
+  tipo de retorno: Objeto
+  status de retorno: 200
+  tipo de método: get
+  parametros necessários: id do quadrinho
+  schema: {
+    idComic: number,
+    titulo: String
+    descricao: String
+    qtdePaginas: number,
+    dataPublicacao: Array<Object>
+    capa: String
+  }
+  exemplo: {
+        "_id": "6636839bb91b80fe0336ddee",
+        "idComic": 50554,
+        "titulo": "Spider-Verse (2014) #1",
+        "descricao": "SPIDER-VERSE IS HERE! Dive deep into the Spider-Verse event with the most Spider-filled anthology ever! ASM team DAN SLOTT & HUMBERTO RAMOS kick it all off! Skottie Young (ROCKET RACCOON) & Jake Parker (ALL-NEW X-MEN) tell a Mangaverse Spidey story! Robbie Thompson (writer of television's Supernatural) and Dennis Medri introduce a Steampunk Spider-Woman! Katie Cook (Marvel animal variants) introduces a new Spider-Character for the ages!",
+        "qtdePaginas": 48,
+        "dataPublicacao": [
+            {
+                "type": "onsaleDate",
+                "date": "2014-11-12T00:00:00-0500"
+            },
+            {
+                "type": "focDate",
+                "date": "2014-10-20T00:00:00-0400"
+            },
+            {
+                "type": "unlimitedDate",
+                "date": "2015-05-11T00:00:00-0400"
+            },
+            {
+                "type": "digitalPurchaseDate",
+                "date": "2014-11-12T00:00:00-0500"
+            }
+        ],
+        "capa": "http://i.annihil.us/u/prod/marvel/i/mg/8/a0/545d017cdbb04",
+        "__v": 0
+    }
+
+- cria um novo quadrinho: 
+  path: http://localhost:3000/api/v1/comics
+  tipo de retorno: Objeto
+  status de retorno: 201
+  tipo de método: post
+  parametros necessários: corpo do novo personagem
+  schema: {
+    idComic: number,
+    titulo: String
+    descricao: String
+    qtdePaginas: number,
+    dataPublicacao: Array<Object>
+    capa: String
+  }
+  exemplo: {
+        "_id": "6636839bb91b80fe0336ddee",
+        "idComic": 50554,
+        "titulo": "Spider-Verse (2014) #1",
+        "descricao": "SPIDER-VERSE IS HERE! Dive deep into the Spider-Verse event with the most Spider-filled anthology ever! ASM team DAN SLOTT & HUMBERTO RAMOS kick it all off! Skottie Young (ROCKET RACCOON) & Jake Parker (ALL-NEW X-MEN) tell a Mangaverse Spidey story! Robbie Thompson (writer of television's Supernatural) and Dennis Medri introduce a Steampunk Spider-Woman! Katie Cook (Marvel animal variants) introduces a new Spider-Character for the ages!",
+        "qtdePaginas": 48,
+        "dataPublicacao": [
+            {
+                "type": "onsaleDate",
+                "date": "2014-11-12T00:00:00-0500"
+            },
+            {
+                "type": "focDate",
+                "date": "2014-10-20T00:00:00-0400"
+            },
+            {
+                "type": "unlimitedDate",
+                "date": "2015-05-11T00:00:00-0400"
+            },
+            {
+                "type": "digitalPurchaseDate",
+                "date": "2014-11-12T00:00:00-0500"
+            }
+        ],
+        "capa": "http://i.annihil.us/u/prod/marvel/i/mg/8/a0/545d017cdbb04",
+        "__v": 0
+    }
+
+- atualiza um quadrinho:
+  path: http://localhost:3000/api/v1/atualizaComic/:id
+  tipo de retorno: Objeto
+  status de retorno: 200
+  tipo de método: put
+  schema: {
+    idComic: number,
+    titulo: String
+    descricao: String
+    qtdePaginas: number,
+    dataPublicacao: Array<Object>
+    capa: String
+  }
+  exemplo: http://localhost:3000/api/v1/atualizaComic/662d3ffc6cb4c335f9c03ac2
+  body: {
+    "idComic": 9000,
+    "titulo": "kenji agora é o homem-aranha 3",
+    "descricao": "após tomar uma pica muito dolorida, kenji se torna o mais novo homem-aranha com habilidades especiais em fazer os piores códigos já vistos pela humanidade. Ele utiliza seu poder para neutralizar os inimigos de vergonha com a ausencia de coesão",
+    "dataPublicacao": [
+        {
+            "onsaleDate": "2004-04-23"
+        }
+    ],
+    "capa": "fotinha linda do kenji"
+}
+
+- deleta um quadrinho:
+  path: http://localhost:3000/api/v1/deletaComic/:id
+  tipo de retorno: void
+  status de retorno: 204
+  tipo de método: delete
+  schema: nenhum
+  exemplo: http://localhost:3000/api/v1/deletaComic/662d3ffc6cb4c335f9c03ac2
+
+- busca o quadrinho com menos paginas:
+  path: http://localhost:3000/api/v1/buscaMenorQuadrinho
+  tipo de retorno: Objeto
+  status de retorno: 200
+  tipo de método: get
+  schema: {
+    idComic: number,
+    titulo: String
+    descricao: String
+    qtdePaginas: number,
+    dataPublicacao: Array<Object>
+    capa: String
+  }
+  exemplo: {
+    "_id": "6636839bb91b80fe0336dded",
+    "idComic": 53336,
+    "titulo": "Spider-Verse (2014) #2",
+    "descricao": "Spider-Verse tie-in! The Spider-Verse anthology continues! So many Spider-Men and Women! This issue: Video-game Spidey! Punk-Rock Spidey! Fairy Tale Spidey! Mexico's own Spider tale in Spanish!",
+    "qtdePaginas": 40,
+    "dataPublicacao": [
+        {
+            "type": "onsaleDate",
+            "date": "2015-01-14T00:00:00-0500"
+        },
+        {
+            "type": "focDate",
+            "date": "2014-12-15T00:00:00-0500"
+        },
+        {
+            "type": "unlimitedDate",
+            "date": "2015-07-27T10:43:44-0400"
+        },
+        {
+            "type": "digitalPurchaseDate",
+            "date": "2015-01-14T00:00:00-0500"
+        }
+    ],
+    "capa": "http://i.annihil.us/u/prod/marvel/i/mg/d/90/55b6423472961",
+    "__v": 0
+}
+
+- busca quadrinho com mais paginas:
+  path: http://localhost:3000/api/v1/buscaMaiorQuadrinho
+  tipo de retorno: Objeto
+  status de retorno: 200
+  tipo de método: get
+  schema: {
+    idComic: number,
+    titulo: String
+    descricao: String
+    qtdePaginas: number,
+    dataPublicacao: Array<Object>
+    capa: String
+  }
+  exemplo: {
+    "_id": "6636839bb91b80fe0336ddee",
+    "idComic": 50554,
+    "titulo": "Spider-Verse (2014) #1",
+    "descricao": "SPIDER-VERSE IS HERE! Dive deep into the Spider-Verse event with the most Spider-filled anthology ever! ASM team DAN SLOTT & HUMBERTO RAMOS kick it all off! Skottie Young (ROCKET RACCOON) & Jake Parker (ALL-NEW X-MEN) tell a Mangaverse Spidey story! Robbie Thompson (writer of television's Supernatural) and Dennis Medri introduce a Steampunk Spider-Woman! Katie Cook (Marvel animal variants) introduces a new Spider-Character for the ages!",
+    "qtdePaginas": 48,
+    "dataPublicacao": [
+        {
+            "type": "onsaleDate",
+            "date": "2014-11-12T00:00:00-0500"
+        },
+        {
+            "type": "focDate",
+            "date": "2014-10-20T00:00:00-0400"
+        },
+        {
+            "type": "unlimitedDate",
+            "date": "2015-05-11T00:00:00-0400"
+        },
+        {
+            "type": "digitalPurchaseDate",
+            "date": "2014-11-12T00:00:00-0500"
+        }
+    ],
+    "capa": "http://i.annihil.us/u/prod/marvel/i/mg/8/a0/545d017cdbb04",
+    "__v": 0
+}
+
+- busca quadrinhos da api da marvel:
+  path: http://localhost:3000/api/v1/comics
+  tipo de retorno: Array de Objeto
+  status de retorno: 20
+  tipo de método: get
+  schema: {
+    idComic: number,
+    titulo: String
+    descricao: String
+    qtdePaginas: number,
+    dataPublicacao: Array<Object>
+    capa: String
+  }
+  exemplo: [
+    {
+        "idComic": 53336,
+        "titulo": "Spider-Verse (2014) #2",
+        "descricao": "Spider-Verse tie-in! The Spider-Verse anthology continues! So many Spider-Men and Women! This issue: Video-game Spidey! Punk-Rock Spidey! Fairy Tale Spidey! Mexico's own Spider tale in Spanish!",
+        "qtdePaginas": 40,
+        "dataPublicacao": [
+            {
+                "type": "onsaleDate",
+                "date": "2015-01-14T00:00:00-0500"
+            },
+            {
+                "type": "focDate",
+                "date": "2014-12-15T00:00:00-0500"
+            },
+            {
+                "type": "unlimitedDate",
+                "date": "2015-07-27T10:43:44-0400"
+            },
+            {
+                "type": "digitalPurchaseDate",
+                "date": "2015-01-14T00:00:00-0500"
+            }
+        ],
+        "capa": "http://i.annihil.us/u/prod/marvel/i/mg/d/90/55b6423472961",
+        "_id": "6636839bb91b80fe0336dded",
+        "__v": 0
+    },
+    {
+        "idComic": 50554,
+        "titulo": "Spider-Verse (2014) #1",
+        "descricao": "SPIDER-VERSE IS HERE! Dive deep into the Spider-Verse event with the most Spider-filled anthology ever! ASM team DAN SLOTT & HUMBERTO RAMOS kick it all off! Skottie Young (ROCKET RACCOON) & Jake Parker (ALL-NEW X-MEN) tell a Mangaverse Spidey story! Robbie Thompson (writer of television's Supernatural) and Dennis Medri introduce a Steampunk Spider-Woman! Katie Cook (Marvel animal variants) introduces a new Spider-Character for the ages!",
+        "qtdePaginas": 48,
+        "dataPublicacao": [
+            {
+                "type": "onsaleDate",
+                "date": "2014-11-12T00:00:00-0500"
+            },
+            {
+                "type": "focDate",
+                "date": "2014-10-20T00:00:00-0400"
+            },
+            {
+                "type": "unlimitedDate",
+                "date": "2015-05-11T00:00:00-0400"
+            },
+            {
+                "type": "digitalPurchaseDate",
+                "date": "2014-11-12T00:00:00-0500"
+            }
+        ],
+        "capa": "http://i.annihil.us/u/prod/marvel/i/mg/8/a0/545d017cdbb04",
+        "_id": "6636839bb91b80fe0336ddee",
+        "__v": 0
+    }
+]

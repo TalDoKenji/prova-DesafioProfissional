@@ -1,0 +1,219 @@
+
+Para iniciar a aplicação é necessário a utilização do comando 'npm start' em um terminal.
+
+o schema da entidade de criador é:
+
+schema: {
+    nome: string                --> nome completo do criador
+    funcao: string              --> função do criador naquele quadrinho
+    quadrinhos: Array<string>   --> array com o nome dos quadrinhos que o criador participou
+  }
+
+as rotas disponíveis na entidade de Criador são:
+
+- salvar criador no banco:
+  path: http://localhost:3000/api/v1/criador
+  tipo do retorno: Array de Objetos
+  status de retorno: 200
+  tipo de método HTTP: get
+  parametros necessários: nenhum
+
+- buscar todos os criadores:
+
+  path: http://localhost:3000/api/v1/todosCriadores
+  tipo de retorno: Array de Objetos
+  status de retorno: 200
+  tipo de método HTTP: get
+  parametros necessários: nenhum
+  schema: {
+    nome: string
+    funcao: string,
+    quadrinhos: Array<string>
+}
+
+  exemplo: [
+    {
+        "_id": "663253ce5211519d1cef1b16",
+        "nome": "Dennis Medri",
+        "funcao": "artist",
+        "quadrinhos": [
+            "Timely Comics: Web Warriors (Trade Paperback)",
+            "Spider-Verse (2014) #1"
+        ],
+        "__v": 0
+    },
+    {
+        "_id": "663253cf5211519d1cef1b1a",
+        "nome": "Sheldon Vella",
+        "funcao": "letterer",
+        "quadrinhos": [
+            "Spider-Verse: Spider-Zero (Trade Paperback)",
+            "BLACK CAT VOL. 4: QUEEN IN BLACK TPB (Trade Paperback)",
+            "Spider-Verse (2019) #1",
+            "Vault of Spiders (2018) #1",
+            "Deadpool By Daniel Way Omnibus Vol. 2 (Hardcover)",
+            "DEADPOOL VOL. 8: OPERATION ANNIHILATION TPB (Trade Paperback)",
+            "Spider-Verse (2014) #2"
+        ],
+        "__v": 0
+    },
+    {
+        "_id": "663253cf5211519d1cef1b1c",
+        "nome": "Robbie Thompson",
+        "funcao": "writer",
+        "quadrinhos": [
+            "How To Read Comics The Marvel Way (Trade Paperback)",
+            "Silk: Out Of The Spider-Verse Vol. 3 (Trade Paperback)",
+            "Silk Vol. 1: Threats And Menaces (Trade Paperback)",
+            "Ms. Marvel Infinity Comic Primer (2021) #1",
+            "Venom Infinity Comic Primer (2021) #1",
+            "Captain Marvel Infinity Comic Primer (2021) #1",
+            "Moon Knight Infinity Comic Primer (2021) #1",
+            "Amazing Spider-Man Infinity Comic Primer (2021) #1",
+            "Spider-Gwen Infinity Comic Primer (2021) #1",
+            "Black Panther Infinity Comic Primer (2021) #1",
+            "Moon Girl and Devil Dinosaur Infinity Comic Primer (2021) #1",
+            "Meet The Skrulls (Trade Paperback)",
+            "Spider-Man/Deadpool Vol. 9: Eventpool (Trade Paperback)",
+            "Solo: A Star Wars Story Adaptation (Trade Paperback)",
+            "Spider-Man/Deadpool Vol. 8: Road Trip (Trade Paperback)",
+            "Spidey: Freshman Year (Trade Paperback)",
+            "Spider-Man/Deadpool Vol. 7: My Two Dads (Trade Paperback)",
+            "Moon Girl and the Marvel Universe (Trade Paperback)",
+            "Spider-Man/Deadpool Vol. 6: WLMD (Trade Paperback)",
+            "Star Wars: Poe Dameron Vol. 4 - Legend Found (Trade Paperback)"
+        ],
+        "__v": 0
+    }
+  ]
+
+- busca criador unico:
+  path: http://localhost:3000/api/v1/criador/:id
+  tipo de retorno: Objeto
+  status de retorno: 200
+  tipo de método HTTP: get
+  parametros necessários: id do criador
+  schema: {
+    nome: string
+    funcao: string,
+    quadrinhos: Array<string>
+  } 
+  exemplo: {
+    "_id": "663253cf5211519d1cef1b1c",
+    "nome": "Robbie Thompson",
+    "funcao": "writer",
+    "quadrinhos": [
+        "How To Read Comics The Marvel Way (Trade Paperback)",
+        "Silk: Out Of The Spider-Verse Vol. 3 (Trade Paperback)",
+        "Silk Vol. 1: Threats And Menaces (Trade Paperback)",
+        "Ms. Marvel Infinity Comic Primer (2021) #1",
+        "Venom Infinity Comic Primer (2021) #1",
+        "Captain Marvel Infinity Comic Primer (2021) #1",
+        "Moon Knight Infinity Comic Primer (2021) #1",
+        "Amazing Spider-Man Infinity Comic Primer (2021) #1",
+        "Spider-Gwen Infinity Comic Primer (2021) #1",
+        "Black Panther Infinity Comic Primer (2021) #1",
+        "Moon Girl and Devil Dinosaur Infinity Comic Primer (2021) #1",
+        "Meet The Skrulls (Trade Paperback)",
+        "Spider-Man/Deadpool Vol. 9: Eventpool (Trade Paperback)",
+        "Solo: A Star Wars Story Adaptation (Trade Paperback)",
+        "Spider-Man/Deadpool Vol. 8: Road Trip (Trade Paperback)",
+        "Spidey: Freshman Year (Trade Paperback)",
+        "Spider-Man/Deadpool Vol. 7: My Two Dads (Trade Paperback)",
+        "Moon Girl and the Marvel Universe (Trade Paperback)",
+        "Spider-Man/Deadpool Vol. 6: WLMD (Trade Paperback)",
+        "Star Wars: Poe Dameron Vol. 4 - Legend Found (Trade Paperback)"
+    ],
+    "__v": 0
+  }
+
+  - cria um novo criador: 
+  path: http://localhost:3000/api/v1/criador
+  tipo de retorno: Objeto
+  status de retono: 201
+  tipo de método HTTP: post
+  parametros necessários: corpo da requisição
+  schema: {
+    nome: string
+    funcao: string,
+    quadrinhos: Array<string>
+  } 
+  exemplo: {
+    "nome": "Enrique Puig",
+    "funcao": "writer",
+    "quadrinhos": ["Spider-Verse (2014) #2"]
+  }
+
+  - atualiza um criador:
+  path: http://localhost:3000/api/v1/atualizaCriador/:id
+  tipo de retorno: Objeto
+  status de retorno: 200
+  tipo de método HTTP: put
+  parametros necessários: id do criador e as novas informações do criador
+  schema: {
+    nome: string
+    funcao: string,
+    quadrinhos: Array<string>
+  }
+  exemplo: http://localhost:3000/api/v1/atualizaCriador/6632c5746b26fc73eaf6a2eb
+  body: {
+    "nome": "kenjinho",
+    "funcao": "suporte",
+    "quadrinhos": ["miranha 1", "miranha 3"]
+  }
+
+  - deleta um criador:
+  path: http://localhost:3000/api/v1/deletaCriador/:id
+  tipo de retorno: void
+  status de retorno: 204
+  tipo de método HTTP: delete
+  schema: nenhum
+  exemplo: http://localhost:3000/api/v1/deletaCriador/6632c5746b26fc73eaf6a2eb
+
+  - busca criador com menos quadrinhos:
+  path: http://localhost:3000/api/v1/criadorComMenosQuadrinho
+  tipo de retorno: Objeto
+  status de retorno: 200
+  tipo de método HTTP: get
+  parametros necessários: nenhum
+  schema: {
+    nome: string
+    funcao: string,
+    quadrinhos: Array<string>
+  }
+  exemplo: {
+    "_id": "663253ce5211519d1cef1b16",
+    "nome": "Dennis Medri",
+    "funcao": "artist",
+    "quadrinhos": [
+        "Timely Comics: Web Warriors (Trade Paperback)",
+        "Spider-Verse (2014) #1"
+    ],
+    "__v": 0
+  }
+
+  - busca criador com mais quadrinos: 
+  path: http://localhost:3000/api/v1/criadorComMaisQuadrinho
+  tipo de retorno: Objeto
+  tipo de método HTTP: get
+  parametros necessário: nenhum
+  schema: {
+    nome: string
+    funcao: string,
+    quadrinhos: Array<string>
+  }
+  exemplo: {
+    "_id": "663253ce5211519d1cef1b16",
+    "nome": "Dennis Medri",
+    "funcao": "artist",
+    "quadrinhos": [
+        "Timely Comics: Web Warriors (Trade Paperback)",
+        "Spider-Verse (2014) #1"
+    ],
+    "__v": 0
+  }
+
+---------------------------------------------------------------------------------------
+
+
+
